@@ -42,7 +42,7 @@ project.version = scmVersion.version
 
 docker {
     name "${project.name}:${project.version}"
-    files "plugins.txt"
+    files "plugins.txt", "seedJob.xml"
 }
 
 Process process
@@ -62,4 +62,5 @@ dockerRun {
     ports '6999:8080'
     clean true
     daemonize false
+    arguments '-v', '//var/run/docker.sock:/var/run/docker.sock', '--group-add', dockerSockGroupId
 }
